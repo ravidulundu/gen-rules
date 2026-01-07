@@ -1,3 +1,17 @@
+/**
+ * ESLint Configuration - Good Taste Edition
+ *
+ * "Good taste is the ability to identify and select solutions that are
+ * not only correct but also elegant, maintainable, and idiomatic."
+ * — Linus Torvalds
+ *
+ * This config enforces:
+ * - Elegance over cleverness
+ * - Simplicity over complexity
+ * - Early returns over nesting
+ * - Small functions over monoliths
+ */
+
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -85,6 +99,49 @@ export default tseslint.config(
         ignoreArrayIndexes: true,
         enforceConst: true,
       }],
+
+      // ============================================
+      // GOOD TASTE RULES (Linus Torvalds)
+      // ============================================
+
+      // No nested ternary - hard to read
+      'no-nested-ternary': 'error',
+
+      // No else after return - use early returns
+      'no-else-return': ['error', { allowElseIf: false }],
+
+      // No lonely if inside else - flatten it
+      'no-lonely-if': 'error',
+
+      // No unneeded ternary - simplify
+      'no-unneeded-ternary': 'error',
+
+      // Prefer template literals over concat
+      'prefer-template': 'error',
+
+      // Object shorthand syntax
+      'object-shorthand': ['error', 'always'],
+
+      // Prefer arrow callbacks
+      'prefer-arrow-callback': 'error',
+
+      // Arrow function style - concise when possible
+      'arrow-body-style': ['error', 'as-needed'],
+
+      // No useless string concat
+      'no-useless-concat': 'error',
+
+      // Prefer destructuring
+      'prefer-destructuring': ['error', {
+        array: false,
+        object: true,
+      }],
+
+      // No confusing arrow functions
+      'no-confusing-arrow': 'error',
+
+      // Consistent return - all paths must return
+      'consistent-return': 'error',
     },
   },
 );
