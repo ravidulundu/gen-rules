@@ -1,0 +1,19 @@
+{
+  "name": "testing",
+  "description": "Testing setup with Vitest for React and Bun test for backend",
+  "devDependencies": {
+    "vitest": "^2.0.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "jsdom": "^25.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "files": [
+    "vitest.config.ts",
+    "src/test/setup.ts"
+  ]
+}

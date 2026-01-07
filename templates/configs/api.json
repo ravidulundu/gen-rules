@@ -1,0 +1,38 @@
+{
+  "name": "api",
+  "description": "Backend-only API project with Hono and Drizzle",
+  "folders": [
+    "src/routes",
+    "src/middleware",
+    "src/db",
+    "src/lib",
+    "src/shared"
+  ],
+  "dependencies": {
+    "hono": "^4.0.0",
+    "@hono/zod-validator": "latest",
+    "drizzle-orm": "^0.39.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "drizzle-kit": "^0.30.0",
+    "eslint": "^9.17.0",
+    "prettier": "^3.0.0",
+    "typescript-eslint": "latest",
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
+    "db:push": "bunx drizzle-kit push",
+    "db:studio": "bunx drizzle-kit studio",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "files": {
+    "drizzle.config.ts": true
+  }
+}

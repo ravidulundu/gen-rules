@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Quality Gate - Pre-commit Hook
+# Bu hook commit oncesi kod kalitesini kontrol eder.
+# ESNETILEMEZ - Hata varsa commit engellenir.
+
+echo "Running pre-commit quality checks..."
+
+# 1. Lint check (zero warnings allowed)
+echo "-> ESLint check..."
+bun run lint --max-warnings=0
+if [ $? -ne 0 ]; then
+  echo "ESLint check FAILED. Fix errors before committing."
+  exit 1
+fi
+
+# 2. Type check
+echo "-> TypeScript check..."
+bun run typecheck
+if [ $? -ne 0 ]; then
+  echo "TypeScript check FAILED. Fix type errors before committing."
+  exit 1
+fi
+
+# 3. Format check (optional - auto-fix)
+echo "-> Formatting..."
+bun run format
+
+# 4. Add formatted files back
+git add -u
+
+echo "Pre-commit checks PASSED."

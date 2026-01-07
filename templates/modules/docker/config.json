@@ -1,0 +1,9 @@
+{
+  "name": "docker",
+  "description": "Docker and docker-compose configuration for Dokploy deployment",
+  "files": [
+    "Dockerfile",
+    "docker-compose.yml",
+    ".dockerignore"
+  ]
+}

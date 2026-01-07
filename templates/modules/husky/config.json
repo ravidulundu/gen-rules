@@ -1,0 +1,15 @@
+{
+  "name": "husky",
+  "description": "Git hooks with Husky and lint-staged for pre-commit quality checks",
+  "devDependencies": {
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "scripts": {
+    "prepare": "husky"
+  },
+  "files": [
+    ".husky/pre-commit",
+    ".husky/pre-push"
+  ]
+}

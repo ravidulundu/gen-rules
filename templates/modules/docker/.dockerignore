@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build cache
+.turbo/
+.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+coverage/
+*.test.ts
+*.spec.ts
+__tests__/
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Documentation
+*.md
+!README.md

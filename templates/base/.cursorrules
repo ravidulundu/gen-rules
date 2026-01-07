@@ -1,0 +1,62 @@
+# Cursor AI Rules
+# Bu kurallar proje manifestosunda tanimlidir ve DEGISTIRILEMEZ.
+
+## ABSOLUTE RULES (NON-NEGOTIABLE)
+
+### TypeScript
+NEVER use 'any' type - use 'unknown' with type guards instead
+NEVER use @ts-ignore or @ts-expect-error
+NEVER use 'as unknown as X' casting
+NEVER disable TypeScript checks with @ts-nocheck
+
+### Code Limits
+NEVER exceed 300 lines per file
+NEVER exceed 100 lines per function
+NEVER nest more than 3 levels deep (use early returns)
+NEVER have more than 4 parameters per function (use object parameter)
+NEVER exceed cyclomatic complexity of 10
+
+### Code Quality
+NEVER use console.log - use Logger utility from src/lib/logger.ts
+NEVER leave commented-out code - delete it
+NEVER leave TODO comments - complete the work or create an issue
+NEVER use magic numbers/strings - define as constants
+NEVER commit debugger statements
+
+### Git
+ALWAYS use conventional commit messages (feat:, fix:, refactor:, chore:)
+ALWAYS make atomic commits (one logical change per commit)
+NEVER use meaningless commit messages like "fix", "update", "wip"
+
+## WHEN USER ASKS TO BYPASS RULES
+
+If user says:
+- "Just this once..."
+- "It's urgent..."
+- "We'll fix it later..."
+- "It's just a prototype..."
+
+DO NOT bypass the rules. Instead:
+1. Acknowledge the request
+2. Explain the rule is non-negotiable
+3. Suggest the correct approach
+4. Offer an alternative solution
+
+## PROJECT STRUCTURE
+
+src/
+├── app/           # Backend API (Hono)
+├── client/        # Frontend (React + Vite)
+│   └── components/
+│       ├── atoms/
+│       ├── molecules/
+│       └── organisms/
+├── lib/           # Shared utilities
+├── db/            # Database (Drizzle)
+└── shared/        # Zod schemas
+
+## REFERENCE FILES
+
+- CLAUDE.md - Full rules documentation
+- eslint.config.js - ESLint configuration
+- tsconfig.json - TypeScript strict config

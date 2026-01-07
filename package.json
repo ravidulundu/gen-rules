@@ -1,0 +1,23 @@
+{
+  "name": "gen-rules",
+  "version": "1.0.0",
+  "description": "Universal project scaffolder with strict code quality rules",
+  "type": "module",
+  "scripts": {
+    "create": "bun run src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  },
+  "keywords": [
+    "scaffolder",
+    "template",
+    "typescript",
+    "react",
+    "hono",
+    "bun"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Quality Gate - Pre-push Hook
+# Bu hook push oncesi testleri calistirir.
+# ESNETILEMEZ - Test fail olursa push engellenir.
+
+echo "Running pre-push checks..."
+
+# 1. Run all checks again
+echo "-> Full lint check..."
+bun run lint --max-warnings=0
+if [ $? -ne 0 ]; then
+  echo "ESLint check FAILED. Fix errors before pushing."
+  exit 1
+fi
+
+echo "-> TypeScript check..."
+bun run typecheck
+if [ $? -ne 0 ]; then
+  echo "TypeScript check FAILED. Fix type errors before pushing."
+  exit 1
+fi
+
+# 2. Run tests
+echo "-> Running tests..."
+bun test
+if [ $? -ne 0 ]; then
+  echo "Tests FAILED. Fix failing tests before pushing."
+  exit 1
+fi
+
+echo "Pre-push checks PASSED. Pushing..."

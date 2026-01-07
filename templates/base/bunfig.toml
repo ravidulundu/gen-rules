@@ -1,0 +1,11 @@
+[install]
+# Dependency Hell Prevention Protocol
+# Her zaman tam surumu kaydet (orn: "^1.0.0" yerine "1.2.3")
+save-exact = true
+
+# Lockfile zorunlu
+save-lockfile = true
+
+[run]
+# Bun runtime kullan
+bun = true
