@@ -195,6 +195,23 @@ function process(data: unknown): User {
 }
 ```
 
+### Good Taste Rules (ESLint Enforced)
+
+These rules enforce Linus Torvalds' "good taste" philosophy at the lint level:
+
+| Rule | Description | Rationale |
+|------|-------------|-----------|
+| `no-nested-ternary` | No `a ? b : c ? d : e` | Hard to read |
+| `no-else-return` | No `else` after `return` | Use early returns |
+| `no-lonely-if` | No lonely `if` in `else` | Flatten to `else if` |
+| `no-unneeded-ternary` | No `x ? true : false` | Simplify to `!!x` |
+| `prefer-template` | No `'a' + b + 'c'` | Use template literals |
+| `object-shorthand` | No `{ name: name }` | Use `{ name }` |
+| `prefer-arrow-callback` | No `function()` callbacks | Use arrow functions |
+| `arrow-body-style` | No `() => { return x }` | Use `() => x` |
+| `no-confusing-arrow` | No `x => x > 0 ? 1 : 0` | Wrap in parens |
+| `consistent-return` | All paths must return | Predictable functions |
+
 ### Code Quality
 
 | Rule | Rationale |
