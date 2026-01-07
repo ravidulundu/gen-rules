@@ -1,0 +1,21 @@
+{
+  "name": "shadcn",
+  "description": "shadcn/ui component library setup",
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.0",
+    "@radix-ui/react-slot": "^1.0.2"
+  },
+  "devDependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "scripts": {
+    "ui:add": "bunx shadcn@latest add"
+  },
+  "files": [
+    "components.json",
+    "lib/utils.ts"
+  ],
+  "postInstall": "After install, run 'bun run ui:add button input card' to add components"
+}

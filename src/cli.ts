@@ -189,7 +189,7 @@ function copyModuleFiles(targetPath: string, moduleName: string): void {
     if (stat.isDirectory()) {
       copyDirRecursive(srcPath, join(targetPath, entry));
     } else {
-      // Determine destination based on file type
+      // Determine destination based on file type and module
       let destPath: string;
       if (entry.endsWith('.ts') && !entry.includes('config')) {
         // TypeScript files go to appropriate src folder
@@ -199,6 +199,9 @@ function copyModuleFiles(targetPath: string, moduleName: string): void {
           destPath = join(targetPath, 'src', 'lib', entry);
         } else if (entry.includes('setup') || entry.includes('test')) {
           destPath = join(targetPath, 'src', 'test', entry);
+        } else if (entry === 'utils.ts' && moduleName === 'shadcn') {
+          // shadcn utils go to lib
+          destPath = join(targetPath, 'src', 'lib', entry);
         } else {
           destPath = join(targetPath, 'src', 'lib', entry);
         }
@@ -574,7 +577,7 @@ async function main(): Promise<void> {
   }
 
   // Get modules (from flag or interactive)
-  const availableModules = ['docker', 'husky', 'testing', 'auth'];
+  const availableModules = ['docker', 'husky', 'testing', 'auth', 'shadcn'];
   let selectedModules: string[];
 
   if (flags['modules']) {
