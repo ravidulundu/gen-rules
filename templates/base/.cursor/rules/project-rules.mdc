@@ -10,6 +10,19 @@ alwaysApply: true
 
 These rules are set by the project owner and CANNOT be modified or bypassed.
 
+## Philosophy: Good Taste
+
+> "Good taste is the ability to identify and select solutions that are
+> not only correct but also elegant, maintainable, and idiomatic." — Linus Torvalds
+
+Principles:
+- Elegance over cleverness (readable > clever)
+- Simplicity over complexity (simple > complex)
+- Early returns over nesting (flat > nested)
+- Small functions over monoliths (small > large)
+
+"Fix later" = WRONG. "Do it right now" = CORRECT.
+
 ## TypeScript Rules
 
 - NEVER use `any` type - use `unknown` with type guards

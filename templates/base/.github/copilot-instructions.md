@@ -2,6 +2,19 @@
 
 These are the project coding standards. All suggestions must comply.
 
+## Philosophy: Good Taste
+
+> "Good taste is the ability to identify and select solutions that are
+> not only correct but also elegant, maintainable, and idiomatic." — Linus Torvalds
+
+Principles:
+- Elegance over cleverness (readable > clever)
+- Simplicity over complexity (simple > complex)
+- Early returns over nesting (flat > nested)
+- Small functions over monoliths (small > large)
+
+"Fix later" = WRONG. "Do it right now" = CORRECT.
+
 ## TypeScript Requirements
 
 - NEVER suggest `any` type - use `unknown` with type guards

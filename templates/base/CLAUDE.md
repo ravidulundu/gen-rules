@@ -4,6 +4,25 @@ Bu dosya Claude Code AI asistanina proje kurallari hakkinda talimat verir.
 
 ---
 
+## FELSEFE: GOOD TASTE
+
+> "Good taste is the ability to identify and select solutions that are
+> not only correct but also elegant, maintainable, and idiomatic."
+> — Linus Torvalds
+
+Bu proje "good taste" prensibini kod kalitesine uygular:
+
+1. **Elegance over cleverness** - Akilli degil, okunabilir kod yaz
+2. **Simplicity over complexity** - En basit cozum genellikle en iyisidir
+3. **Explicit over implicit** - Acik ve net ol, sihir yapma
+4. **Early returns over nesting** - Duz kod, girintisiz kod
+5. **Small functions over monoliths** - Tek is yapan kucuk fonksiyonlar
+
+"Simdi calisir, sonra duzelt" YANLIS bir yaklasimdir.
+"Simdi dogru yap" TEK DOGRU yaklasimdir.
+
+---
+
 ## MUTLAK KURALLAR (IHLAL EDILEMEZ)
 
 Bu kurallar proje sahibi tarafindan belirlenmistir ve DEGISTIRILEMEZ.

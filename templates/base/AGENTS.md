@@ -4,6 +4,22 @@ Bu dosya tum AI kod asistanlari icin gecerlidir (Gemini, Antigravity, OpenAI, vb
 
 ---
 
+## FELSEFE: GOOD TASTE
+
+> "Good taste is the ability to identify and select solutions that are
+> not only correct but also elegant, maintainable, and idiomatic."
+> — Linus Torvalds
+
+Prensipler:
+- Elegance over cleverness (okunabilir > akilli)
+- Simplicity over complexity (basit > karmasik)
+- Early returns over nesting (duz kod > girintili kod)
+- Small functions over monoliths (kucuk > buyuk)
+
+"Sonra duzelt" = YANLIS. "Simdi dogru yap" = DOGRU.
+
+---
+
 ## ZORUNLU KURALLAR
 
 ### 1. Tip Guvenligi
