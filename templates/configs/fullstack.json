@@ -3,9 +3,8 @@
   "description": "Full-stack web application with Hono backend and React frontend",
   "folders": [
     "src/app",
-    "src/client/components/atoms",
-    "src/client/components/molecules",
-    "src/client/components/organisms",
+    "src/client/components",
+    "src/client/components/ui",
     "src/client/features",
     "src/client/hooks",
     "src/db",
@@ -20,7 +19,11 @@
     "zod": "^3.23.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "lucide-react": "^0.469.0"
+    "lucide-react": "^0.469.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.0",
+    "@radix-ui/react-slot": "^1.0.2"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
@@ -31,13 +34,16 @@
     "postcss": "latest",
     "autoprefixer": "latest",
     "eslint": "^9.17.0",
+    "@eslint/js": "^9.17.0",
+    "globals": "^16.0.0",
     "prettier": "^3.0.0",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
     "typescript-eslint": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "tailwindcss-animate": "^1.0.7"
   },
   "scripts": {
     "dev": "bun run dev:api & bun run dev:ui",
@@ -50,7 +56,8 @@
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "ui:add": "bunx shadcn@latest add"
   },
   "files": {
     "vite.config.ts": true,

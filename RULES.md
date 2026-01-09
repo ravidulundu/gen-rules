@@ -150,13 +150,12 @@ docs: add API documentation
 
 ## 6. Dosya Organizasyonu
 
-### Atomic Design (Frontend)
+### shadcn/ui (Frontend)
 
 ```
 components/
-├── atoms/       # Button, Input, Badge
-├── molecules/   # Form, SearchBar
-└── organisms/   # Header, Sidebar
+├── ui/          # shadcn/ui components (Button, Input, Card)
+└── [custom]/    # Custom components
 ```
 
 ### Feature-Based (Backend)

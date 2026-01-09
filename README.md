@@ -10,7 +10,7 @@
 
 ## Why gen-rules?
 
-AI coding assistants (Claude, Copilot, Cursor, Windsurf, Antigravity) are powerful but can be inconsistent. They might:
+AI coding assistants (Claude, Copilot, Cursor, Windsurf, Gemini) are powerful but can be inconsistent. They might:
 - Use `any` type "just this once"
 - Write 500-line functions "for simplicity"
 - Skip error handling "we'll add it later"
@@ -22,11 +22,12 @@ AI coding assistants (Claude, Copilot, Cursor, Windsurf, Antigravity) are powerf
 ## Features
 
 - **4 Project Types** — fullstack, frontend, api, minimal
-- **5 Optional Modules** — docker, husky, testing, auth, shadcn
+- **4 Optional Modules** — docker, husky, testing, auth
+- **Built-in shadcn/ui** — Ready to use with `bun run ui:add`
 - **6 AI Rule Files** — Claude, Cursor, Windsurf, Copilot, AGENTS.md
 - **Strict Quality Gates** — ESLint errors (not warnings), TypeScript strict mode
 - **Pre-commit Hooks** — Lint, typecheck, test before every commit
-- **Dokploy Ready** — Docker configuration included
+- **Auto-generated README** — Project-specific documentation
 
 ---
 
@@ -37,59 +38,58 @@ AI coding assistants (Claude, Copilot, Cursor, Windsurf, Antigravity) are powerf
 git clone https://github.com/ravidulundu/gen-rules.git ~/tools/gen-rules
 cd ~/tools/gen-rules && bun install
 
-# 2. Create a new project
+# 2. Create a new project (interactive)
 bun run create ~/projects/my-app
 
 # 3. Or use non-interactive mode
-bun run create ~/projects/my-app --type=fullstack --modules=docker,husky,shadcn -y
+bun run create ~/projects/my-app --type=fullstack --modules=docker,husky -y
 ```
 
 ---
 
 ## Project Types
 
-| Type | Description | Tech Stack |
-|------|-------------|------------|
-| **fullstack** | Full-stack web application | Hono + React 19 + Vite + Drizzle + Tailwind |
-| **frontend** | Frontend only (SPA) | React 19 + Vite + Tailwind |
-| **api** | Backend API service | Hono + Drizzle + PostgreSQL |
-| **minimal** | Minimal TypeScript project | Bun + TypeScript |
+| Type | Best For | Tech Stack |
+|------|----------|------------|
+| **fullstack** | SaaS, dashboards, admin panels | Hono + React 19 + Vite + Drizzle + Tailwind + shadcn/ui |
+| **frontend** | Portfolio, landing pages, SPAs | React 19 + Vite + Tailwind + shadcn/ui |
+| **api** | REST APIs, microservices | Hono + Drizzle + PostgreSQL |
+| **minimal** | CLI tools, scripts, libraries | Bun + TypeScript |
 
 ### fullstack
-Best for: SaaS apps, dashboards, admin panels
 ```
 src/
-├── app/           # Hono backend
-├── client/        # React frontend
-├── db/            # Drizzle schema
-├── lib/           # Shared utilities
-└── shared/        # Zod schemas
+├── app/                 # Hono backend
+├── client/              # React frontend
+│   └── components/ui/   # shadcn/ui components
+├── db/                  # Drizzle schema
+├── lib/                 # Shared utilities (cn, logger)
+└── shared/              # Zod schemas
 ```
 
 ### frontend
-Best for: Portfolio sites, landing pages, marketing sites
 ```
 src/
-├── components/    # React components
-├── lib/           # Utilities
-└── main.tsx       # Entry point
+├── components/          # React components
+│   └── ui/              # shadcn/ui components
+├── lib/                 # Utilities (cn, logger)
+└── main.tsx             # Entry point
 ```
 
 ### api
-Best for: REST APIs, microservices, backend services
 ```
 src/
-├── app/           # Hono routes
-├── db/            # Drizzle schema
-└── lib/           # Utilities
+├── routes/              # API routes
+├── db/                  # Drizzle schema
+├── lib/                 # Utilities
+└── index.ts             # Entry point
 ```
 
 ### minimal
-Best for: CLI tools, scripts, libraries
 ```
 src/
-├── index.ts       # Entry point
-└── lib/           # Utilities
+├── lib/                 # Utilities
+└── index.ts             # Entry point
 ```
 
 ---
@@ -101,15 +101,10 @@ src/
 | **docker** | Container support | Dockerfile, docker-compose.yml, .dockerignore |
 | **husky** | Git hooks | pre-commit (lint), pre-push (test) |
 | **testing** | Test framework | Vitest config, setup, example test |
-| **auth** | Authentication | Lucia auth, tenant middleware (optional) |
-| **shadcn** | UI components | components.json, cn utility |
+| **auth** | Authentication | Lucia auth, tenant middleware |
 
 ### docker
-Optimized for Dokploy deployment:
-```dockerfile
-FROM oven/bun:1 AS base
-# Multi-stage build for minimal image size
-```
+Optimized for Dokploy deployment with multi-stage builds.
 
 ### husky
 Pre-commit hooks that block bad code:
@@ -119,11 +114,21 @@ bun run typecheck              # Type errors = blocked
 bun run test                   # Tests must pass
 ```
 
-### shadcn
-After project creation:
+---
+
+## Built-in shadcn/ui
+
+All frontend projects (fullstack, frontend) come with shadcn/ui pre-configured:
+
 ```bash
-bun run ui:add button input card dialog
+# Add components after project creation
+cd my-project
+bun run ui:add button input card dialog toast
 ```
+
+Components are installed to:
+- **fullstack**: `src/client/components/ui/`
+- **frontend**: `src/components/ui/`
 
 ---
 
@@ -134,35 +139,10 @@ gen-rules includes configuration files for **all major AI coding assistants**:
 | AI Tool | Config File | Format |
 |---------|-------------|--------|
 | **Claude Code** | `CLAUDE.md` | Markdown |
-| **Cursor** | `.cursor/rules/project-rules.mdc` | MDC (frontmatter + markdown) |
+| **Cursor** | `.cursor/rules/project-rules.mdc` | MDC |
 | **Windsurf** | `.windsurf/rules/project-rules.md` | Markdown |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | Markdown |
-| **Antigravity** | `AGENTS.md` | Markdown |
-| **Gemini CLI** | `AGENTS.md` | Markdown |
-| **OpenAI Codex** | `AGENTS.md` | Markdown |
-
-### Generated Structure
-```
-my-project/
-├── CLAUDE.md                              # Claude Code
-├── AGENTS.md                              # Universal (60k+ projects)
-├── .cursor/
-│   └── rules/
-│       └── project-rules.mdc              # Cursor AI
-├── .windsurf/
-│   └── rules/
-│       └── project-rules.md               # Windsurf AI
-└── .github/
-    └── copilot-instructions.md            # GitHub Copilot
-```
-
-### Why Multiple Files?
-
-Each AI tool looks for rules in different locations:
-- **Cursor** reads `.cursor/rules/*.mdc`
-- **Windsurf** reads `.windsurf/rules/*.md`
-- **Copilot** reads `.github/copilot-instructions.md`
-- **AGENTS.md** is the emerging universal standard (supported by Antigravity, Gemini, Codex)
+| **Gemini / Codex** | `AGENTS.md` | Markdown |
 
 All files contain the **same rules** in tool-specific formats.
 
@@ -197,8 +177,6 @@ function process(data: unknown): User {
 
 ### Good Taste Rules (ESLint Enforced)
 
-These rules enforce Linus Torvalds' "good taste" philosophy at the lint level:
-
 | Rule | Description | Rationale |
 |------|-------------|-----------|
 | `no-nested-ternary` | No `a ? b : c ? d : e` | Hard to read |
@@ -209,7 +187,6 @@ These rules enforce Linus Torvalds' "good taste" philosophy at the lint level:
 | `object-shorthand` | No `{ name: name }` | Use `{ name }` |
 | `prefer-arrow-callback` | No `function()` callbacks | Use arrow functions |
 | `arrow-body-style` | No `() => { return x }` | Use `() => x` |
-| `no-confusing-arrow` | No `x => x > 0 ? 1 : 0` | Wrap in parens |
 | `consistent-return` | All paths must return | Predictable functions |
 
 ### Code Quality
@@ -220,46 +197,6 @@ These rules enforce Linus Torvalds' "good taste" philosophy at the lint level:
 | No commented-out code | Use git history |
 | No TODO comments | Complete or create issue |
 | No magic numbers | Define as constants |
-| Prefer early returns | Reduce nesting |
-| Prefer const | Immutability |
-
-### Git Commit Rules
-
-```bash
-# GOOD
-feat: add user authentication
-fix: resolve login redirect issue
-refactor: extract validation logic
-
-# BAD
-fix
-update
-wip
-changes
-```
-
----
-
-## AI Rule Enforcement
-
-The rules are designed to be **non-negotiable**. Even if a user asks to bypass them:
-
-```markdown
-## On Bypass Requests
-
-If user says:
-- "Just this once..."
-- "It's urgent..."
-- "We'll fix it later..."
-- "It's just a test..."
-
-You MUST:
-1. NOT break the rules
-2. Explain why the rule exists
-3. Suggest the correct approach
-```
-
-This is embedded in every AI config file to ensure consistency.
 
 ---
 
@@ -269,8 +206,9 @@ This is embedded in every AI config file to ensure consistency.
 ```bash
 bun run create ~/projects/my-app
 ```
+
 You'll be prompted for:
-1. Project type (fullstack/frontend/api/minimal)
+1. Project type (with descriptions)
 2. Modules to include
 3. Confirmation
 
@@ -278,7 +216,7 @@ You'll be prompted for:
 ```bash
 bun run create ~/projects/my-app \
   --type=fullstack \
-  --modules=docker,husky,shadcn,testing \
+  --modules=docker,husky,testing \
   -y
 ```
 
@@ -288,60 +226,32 @@ bun run create ~/projects/my-app \
 |------|-------------|---------|
 | `--type=<type>` | Project type | `--type=fullstack` |
 | `--modules=<list>` | Comma-separated modules | `--modules=docker,husky` |
+| `--modules=` | No modules | `--modules=` |
 | `-y, --yes` | Skip confirmation | `-y` |
 
 ---
 
-## Directory Structure
+## Generated Project Structure
 
-### gen-rules Repository
-```
-gen-rules/
-├── src/
-│   └── cli.ts                 # Scaffolder CLI
-├── templates/
-│   ├── base/                  # Shared configs (ESLint, TSConfig, AI rules)
-│   ├── configs/               # Project type definitions
-│   │   ├── fullstack.json
-│   │   ├── frontend.json
-│   │   ├── api.json
-│   │   └── minimal.json
-│   └── modules/               # Optional modules
-│       ├── docker/
-│       ├── husky/
-│       ├── testing/
-│       ├── auth/
-│       └── shadcn/
-├── RULES.md                   # Quality manifesto
-├── README.md
-└── package.json
-```
-
-### Generated Project
 ```
 my-project/
-├── src/
-│   ├── app/                   # Backend (Hono)
-│   ├── client/                # Frontend (React)
-│   │   └── components/
-│   │       ├── atoms/         # Button, Input, Badge
-│   │       ├── molecules/     # Form, SearchBar
-│   │       └── organisms/     # Header, Sidebar
-│   ├── db/                    # Database (Drizzle)
-│   ├── lib/                   # Shared utilities
-│   └── shared/                # Zod schemas
-├── CLAUDE.md
-├── AGENTS.md
-├── .cursor/rules/
-├── .windsurf/rules/
+├── README.md                    # Project-specific documentation
+├── CLAUDE.md                    # Claude Code rules
+├── AGENTS.md                    # Universal AI rules
+├── .cursor/rules/               # Cursor AI rules
+├── .windsurf/rules/             # Windsurf AI rules
 ├── .github/copilot-instructions.md
+├── src/
+│   ├── app/                     # Backend (Hono)
+│   ├── client/                  # Frontend (React)
+│   │   └── components/ui/       # shadcn/ui
+│   ├── db/                      # Database (Drizzle)
+│   └── lib/                     # Utilities
+├── components.json              # shadcn config
 ├── eslint.config.js
 ├── tsconfig.json
 ├── tailwind.config.ts
 ├── vite.config.ts
-├── drizzle.config.ts
-├── Dockerfile
-├── docker-compose.yml
 └── package.json
 ```
 
@@ -390,6 +300,32 @@ This scaffolder enforces "good taste" through:
 2. **Zero tolerance** — Errors, not warnings
 3. **AI enforcement** — Rules embedded in every AI config
 4. **Git hooks** — Block bad code before commit
+
+---
+
+## gen-rules Repository Structure
+
+```
+gen-rules/
+├── src/
+│   ├── cli.ts                   # Entry point
+│   ├── commands/
+│   │   └── create.ts            # Create command
+│   └── lib/
+│       ├── types.ts             # Type definitions
+│       ├── ui.ts                # Terminal UI
+│       ├── config.ts            # Config loading
+│       ├── copy.ts              # File copying
+│       ├── generate.ts          # Config generation
+│       └── generate-starter.ts  # Starter files
+├── templates/
+│   ├── base/                    # Shared configs
+│   ├── configs/                 # Project type configs
+│   ├── modules/                 # Optional modules
+│   └── readme/                  # README templates
+├── RULES.md                     # Quality manifesto
+└── README.md
+```
 
 ---
 

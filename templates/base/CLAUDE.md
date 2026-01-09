@@ -92,13 +92,18 @@ src/
 ├── app/           # Backend (Hono API)
 ├── client/        # Frontend (React)
 │   └── components/
-│       ├── atoms/      # Button, Input, Badge
-│       ├── molecules/  # Form, Card with content
-│       └── organisms/  # Header, Sidebar
-├── lib/           # Shared utilities
+│       └── ui/    # shadcn/ui components
+├── lib/           # Shared utilities (cn, logger, vb.)
 ├── db/            # Database schema & queries
 └── shared/        # Zod schemas (type contracts)
 ```
+
+### shadcn/ui Kullanimi
+
+- Yeni component eklemek: `bun run ui:add button input card`
+- UI componentleri: `src/client/components/ui/`
+- Custom componentler: `src/client/components/`
+- Utility fonksiyonu: `src/lib/utils.ts` (cn fonksiyonu)
 
 ---
 

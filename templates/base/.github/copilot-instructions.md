@@ -50,13 +50,18 @@ src/
 ├── app/        # Hono API backend
 ├── client/     # React frontend
 │   └── components/
-│       ├── atoms/      # Basic UI elements
-│       ├── molecules/  # Composite components
-│       └── organisms/  # Complex sections
-├── lib/        # Shared utilities
+│       └── ui/  # shadcn/ui components
+├── lib/        # Shared utilities (cn, logger, etc.)
 ├── db/         # Drizzle ORM
 └── shared/     # Zod schemas
 ```
+
+## shadcn/ui Usage
+
+- Add components: `bun run ui:add button input card`
+- UI components: `src/client/components/ui/`
+- Custom components: `src/client/components/`
+- Use `cn()` from `src/lib/utils.ts` for class merging
 
 ## Commit Messages
 

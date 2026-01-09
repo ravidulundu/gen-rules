@@ -55,10 +55,11 @@ Prensipler:
 ### 4. Yapisal Kurallar
 
 ```
-[X] Atomic Design: atoms -> molecules -> organisms
+[X] shadcn/ui: components/ui/ (shadcn) + components/ (custom)
 [X] Feature-based folder structure
 [X] Zod schemas for validation
 [X] Conventional commits
+[X] cn() utility for Tailwind class merging
 ```
 
 ---
